@@ -1,0 +1,44 @@
+# morpho3D - main `morpho3d` environment: GUI, orchestrator and TripoSR.
+# Verified working on Windows 11, RTX 3080 Ti (sm_86), CUDA 12.4.
+#
+#   conda create -n morpho3d python=3.11 -y
+#   conda activate morpho3d
+#   pip install torch==2.5.1 torchvision==0.20.1 torchaudio==2.5.1 \
+#       --index-url https://download.pytorch.org/whl/cu124
+#   pip install -r requirements.txt
+#
+# Other backends install into their own envs; see README.md.
+
+# --- GUI ---------------------------------------------------------------
+PyQt6
+pyvista
+pyvistaqt
+vtk==9.3.1          # 9.7 ships a broken wheel: vtkRenderingFreeType is missing
+
+# --- imaging / meshes --------------------------------------------------
+Pillow
+numpy
+imageio
+imageio-ffmpeg
+opencv-python-headless
+trimesh
+pygltflib
+xatlas
+scipy
+
+# --- model runtime -----------------------------------------------------
+transformers==4.49.0   # v5 refactored ViT and breaks TripoSR's DINO checkpoint
+tokenizers<0.22
+safetensors
+huggingface_hub
+omegaconf
+einops
+tqdm
+
+# --- background removal ------------------------------------------------
+rembg
+onnxruntime
+
+# --- TripoSR -----------------------------------------------------------
+PyMCubes            # stands in for torchmcubes, which needs nvcc + MSVC
+moderngl
